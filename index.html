@@ -13,142 +13,113 @@
             background-color: #f0fdf4;
             color: #064e3b;
             margin: 0;
-            padding: 12px;
+            padding: 8px;
         }
         .container {
-            width: 100%;
-            max-width: 100%;
+            max-width: 750px;
             margin: auto;
             background: #ffffff;
-            padding: 20px 24px;
-            border-radius: 12px;
+            padding: 12px 16px;
+            border-radius: 10px;
             box-shadow: 0 4px 15px rgba(5, 150, 105, 0.1);
             border: 1.5px solid #a7f3d0;
         }
         .logo-container {
             text-align: center;
             border-bottom: 2px solid #a7f3d0;
-            padding-bottom: 8px;
-            margin-bottom: 12px;
+            padding-bottom: 4px;
+            margin-bottom: 8px;
         }
         .logo-container img {
-            max-height: 65px;
+            max-height: 55px;
             object-fit: contain;
             display: block;
             margin: 0 auto;
         }
-        h2 { text-align: center; color: #059669; font-size: 18px; margin: 0 0 12px 0; }
+        h2 { text-align: center; color: #059669; font-size: 16px; margin: 0 0 8px 0; }
         
         fieldset {
             border: 1px solid #a7f3d0;
-            border-radius: 8px;
-            padding: 10px 14px;
-            margin-bottom: 12px;
+            border-radius: 6px;
+            padding: 6px 10px;
+            margin-bottom: 6px;
             background-color: #ffffff;
         }
-        legend { font-weight: bold; color: #047857; padding: 0 6px; font-size: 12.5px; }
-        .row { display: flex; gap: 10px; margin-bottom: 8px; }
+        legend { font-weight: bold; color: #047857; padding: 0 4px; font-size: 11px; }
+        .row { display: flex; gap: 8px; margin-bottom: 4px; }
         .row:last-child { margin-bottom: 0; }
         .field { flex: 1; display: flex; flex-direction: column; }
-        label { font-size: 12px; font-weight: bold; color: #166534; margin-bottom: 3px; }
+        label { font-size: 10.5px; font-weight: bold; color: #166534; margin-bottom: 2px; }
         
         input[type="text"], input[type="date"], input[type="tel"], input[type="email"] {
-            padding: 7px 10px;
+            padding: 4px 6px;
             border: 1px solid #a7f3d0;
-            border-radius: 6px;
-            font-size: 13px;
+            border-radius: 4px;
+            font-size: 11px;
             outline: none;
             background: #fff;
             color: #064e3b;
             width: 100%;
         }
-        input.invalid {
-            border-color: #ef4444 !important;
-            background-color: #fef2f2 !important;
-        }
         
-        .grid-checkboxes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px 10px; }
-        .checkbox-item { font-size: 12px; color: #14532d; display: flex; align-items: center; gap: 5px; cursor: pointer; }
-        .checkbox-item input { width: 15px; height: 15px; accent-color: #059669; }
+        .grid-checkboxes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px 6px; }
+        .checkbox-item { font-size: 10px; color: #14532d; display: flex; align-items: center; gap: 3px; }
+        .checkbox-item input { width: 13px; height: 13px; accent-color: #059669; cursor: pointer; }
 
-        .radio-group { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: #14532d; }
-        .radio-item { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+        .radio-group { display: flex; flex-wrap: wrap; gap: 8px; font-size: 10.5px; color: #14532d; }
+        .radio-item { display: flex; align-items: center; gap: 3px; cursor: pointer; }
         
-        .declaration-text {
-            font-size: 12.5px;
-            line-height: 1.5;
-            color: #064e3b;
-            font-weight: 600;
-            margin-bottom: 10px;
-            background-color: #f0fdf4;
-            padding: 10px 12px;
-            border-radius: 6px;
-            border-right: 4px solid #059669;
-        }
-
-        .sig-container { text-align: center; margin-top: 5px; }
-        .sig-label {
-            font-size: 13px;
-            font-weight: bold;
-            color: #166534;
-            margin-bottom: 6px;
-            display: block;
-            text-align: right;
+        .sig-container { text-align: center; margin-top: 2px; }
+        .canvas-wrapper {
+            width: 100%;
+            max-width: 420px;
+            height: 120px;
+            margin: 0 auto;
+            position: relative;
         }
         canvas {
-            border: 1.5px solid #a7f3d0;
-            border-radius: 6px;
-            background: #fff;
+            border: 1.5px solid #059669;
+            border-radius: 8px;
+            background: #fafafa;
             touch-action: none;
             width: 100%;
-            height: 90px;
+            height: 100%;
             cursor: crosshair;
         }
-        .btn-container { 
-            text-align: center; 
-            margin-top: 15px; 
-            display: flex; 
-            gap: 12px; 
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        button.btn-main {
+        .btn-container { text-align: center; margin-top: 10px; }
+        .submit-btn {
             background-color: #059669;
             color: white;
             border: none;
-            padding: 12px 28px;
+            padding: 12px 20px;
             font-size: 15px;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-            flex: 1;
-            max-width: 250px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 320px;
+            transition: background 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
-        button.btn-main:hover { background-color: #047857; }
-        button.btn-share {
-            background-color: #0284c7;
+        .submit-btn:active { background-color: #047857; transform: scale(0.98); }
+        .clear-btn {
+            background-color: #64748b;
             color: white;
             border: none;
-            padding: 12px 24px;
-            font-size: 15px;
-            font-weight: bold;
-            border-radius: 8px;
+            padding: 5px 12px;
+            font-size: 11px;
+            border-radius: 4px;
+            margin-top: 4px;
             cursor: pointer;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-            flex: 1;
-            max-width: 220px;
         }
-        button.btn-share:hover { background-color: #0369a1; }
-        .clear-btn { background-color: #94a3b8; padding: 5px 12px; font-size: 11.5px; margin-top: 6px; width: auto; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        .timestamp-info { font-size: 11px; color: #047857; text-align: left; margin-top: 6px; }
     </style>
 </head>
 <body>
 
 <div class="container" id="form-content">
     <div class="logo-container">
-        <img src="logo.png" alt="ד''ר אסעד אליאס" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'70\'><text x=\'50%\' y=\'50%\' font-size=\'16\' font-family=\'Arial\' text-anchor=\'middle\' fill=\'%23064e3b\' dominant-baseline=\'middle\'>ד&quot;ר אסעד אליאס - מרפאת שיניים משולבת</text></svg>';">
+        <img src="logo.png" alt="ד''ר אסעד אליאס" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'50\'><text x=\'50%\' y=\'50%\' font-size=\'15\' font-family=\'Arial\' text-anchor=\'middle\' fill=\'%23064e3b\' dominant-baseline=\'middle\'>ד&quot;ר אסעד אליאס - מרפאת שיניים משולבת</text></svg>';">
     </div>
 
     <h2>שאלון רפואי / אנמנזה</h2>
@@ -160,10 +131,7 @@
             <div class="field"><label>שם פרטי:</label><input type="text" id="fname" required></div>
         </div>
         <div class="row">
-            <div class="field">
-                <label>תעודת זהות:</label>
-                <input type="text" id="id_num" maxlength="9" placeholder="9 ספרות" required>
-            </div>
+            <div class="field"><label>תעודת זהות:</label><input type="text" id="id_num" required></div>
             <div class="field"><label>תאריך לידה:</label><input type="date" id="dob"></div>
         </div>
         <div class="row">
@@ -183,7 +151,7 @@
             <div class="field"><label>האם אושפזת בבית חולים? מאיזו סיבה?</label><input type="text" id="q_hosp"></div>
             <div class="field"><label>האם אלרגי לתרופות / חומרי הרדמה? לאילו?</label><input type="text" id="q_allergies"></div>
         </div>
-        <div class="row" style="margin-top: 5px;">
+        <div class="row">
             <div class="field"><label>האם יש אלרגיה למתכות? לאילו?</label><input type="text" id="q_metal"></div>
             <div class="field"><label>האם נוטל תרופות או גלולות קבוע? אילו?</label><input type="text" id="q_meds"></div>
         </div>
@@ -191,7 +159,7 @@
 
     <fieldset>
         <legend>קופת חולים, ביטוח והגעה</legend>
-        <div class="row" style="margin-bottom: 5px;">
+        <div class="row">
             <div class="field">
                 <label>קופת חולים:</label>
                 <div class="radio-group">
@@ -207,8 +175,6 @@
                     <label class="radio-item"><input type="radio" name="insurance" value="הראל"> הראל</label>
                     <label class="radio-item"><input type="radio" name="insurance" value="הפניקס"> הפניקס</label>
                     <label class="radio-item"><input type="radio" name="insurance" value="מנורה"> מנורה</label>
-                    <label class="radio-item"><input type="radio" name="insurance" value="מגדל"> מגדל</label>
-                    <label class="radio-item"><input type="radio" name="insurance" value="כלל"> כלל</label>
                     <label class="radio-item"><input type="radio" name="insurance" value="ללא"> ללא</label>
                 </div>
             </div>
@@ -217,8 +183,8 @@
             <div class="field">
                 <label>איך הגעת למרפאה?</label>
                 <div class="radio-group">
-                    <label class="radio-item"><input type="radio" name="arrival" value="המלצה"> דרך המלצה</label>
-                    <label class="radio-item"><input type="radio" name="arrival" value="רשתות"> רשתות חברתיות</label>
+                    <label class="radio-item"><input type="radio" name="arrival" value="המלצה"> המלצה</label>
+                    <label class="radio-item"><input type="radio" name="arrival" value="רשתות"> רשתות</label>
                     <label class="radio-item"><input type="radio" name="arrival" value="אינטרנט"> אינטרנט</label>
                 </div>
             </div>
@@ -230,177 +196,96 @@
     </fieldset>
 
     <fieldset>
-        <legend>אישור וחתימת המתרפא</legend>
-        <div class="declaration-text">
-            הריני מאשר שהשבתי במדויק לשאלות ושעלי להודיע על כל שינוי שיחול במצב בריאותי, ואני נותן את הסכמתי לטיפול ומתחייב לשלם עבורו.
-        </div>
+        <legend>חתימת המתרפא</legend>
         <div class="sig-container">
-            <span class="sig-label">חתימה:</span>
-            <canvas id="sig-canvas"></canvas><br>
+            <div class="canvas-wrapper">
+                <canvas id="sig-canvas"></canvas>
+            </div>
             <button type="button" class="clear-btn" onclick="clearSignature()">נקה חתימה</button>
         </div>
-        <div class="timestamp-info" id="time-display"></div>
     </fieldset>
 
-    <div class="btn-container" id="action-buttons">
-        <button type="button" class="btn-main" onclick="submitForm('save')">שמור טופס PDF</button>
-        <button type="button" class="btn-share" onclick="submitForm('share')">שיתוף PDF</button>
+    <div class="btn-container">
+        <button type="button" class="submit-btn" id="save-btn" onclick="submitForm()">שמור טופס PDF</button>
     </div>
 </div>
 
 <script>
     const conditionsList = [
-        "אנמיה", "מחלת הנפילה / מחלת עצבים", "מחלות ריאות - אסטמה - שחפת", "גידולים",
-        "מחלות עור", "סוכרת", "סחרחורות / התעלפויות", "נטייה לדימום / קרישת דם",
+        "אנמיה", "מחלת הנפילה / עצבים", "מחלות ריאות / אסטמה", "גידולים",
+        "מחלות עור", "סוכרת", "סחרחורות / התעלפויות", "נטייה לדימום / קרישה",
         "הקרנות / כימותרפיה", "בהריון", "בלוטת התריס", "לחץ דם גבוה",
-        "מחלות לב / רשרוש", "מום לב / מסתם לקוי", "דלקת פרקים", "מחלת כליות",
+        "מחלות לב / רשרוש", "מום לב / מסתם", "דלקת פרקים", "מחלת כליות",
         "מחלת כבד / צהבת", "מחלות פסיכיאטריות", "חום / שלשול ממושך", "הגדלת בלוטות",
         "מחלות מין", "איידס", "הפרעות בסגירת הפה", "השתלה"
     ];
-
     const grid = document.getElementById('conditions-grid');
-    conditionsList.forEach((cond, idx) => {
-        grid.innerHTML += `<label class="checkbox-item"><input type="checkbox" id="cond_${idx}" value="${cond}"> ${cond}</label>`;
+    conditionsList.forEach(cond => {
+        grid.innerHTML += `<label class="checkbox-item"><input type="checkbox" value="${cond}"> ${cond}</label>`;
     });
 
     const canvas = document.getElementById('sig-canvas');
     let signaturePad;
 
-    function resizeCanvas() {
+    function initSignaturePad() {
+        const wrapper = canvas.parentElement;
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
-        canvas.width = canvas.offsetWidth * ratio;
-        canvas.height = canvas.offsetHeight * ratio;
+        canvas.width = wrapper.clientWidth * ratio;
+        canvas.height = wrapper.clientHeight * ratio;
         canvas.getContext("2d").scale(ratio, ratio);
-        if (signaturePad) signaturePad.clear();
+        
+        if (!signaturePad) {
+            signaturePad = new SignaturePad(canvas, { penColor: '#065f46' });
+        } else {
+            signaturePad.clear();
+        }
     }
 
-    function isValidIsraeliID(id) {
-        id = String(id).trim();
-        if (id.length > 9 || isNaN(id)) return false;
-        id = id.padStart(9, '0');
-        return Array.from(id, Number).reduce((acc, digit, idx) => {
-            let step = digit * ((idx % 2) + 1);
-            return acc + (step > 9 ? step - 9 : step);
-        }, 0) % 10 === 0;
-    }
-
-    function saveDraft() {
-        const inputs = document.querySelectorAll('input');
-        const draftData = {};
-        inputs.forEach(input => {
-            if (input.type === 'checkbox' || input.type === 'radio') {
-                draftData[input.id || input.name + '_' + input.value] = input.checked;
-            } else {
-                draftData[input.id] = input.value;
-            }
-        });
-        localStorage.setItem('medical_form_draft', JSON.stringify(draftData));
-    }
-
-    function loadDraft() {
-        const saved = localStorage.getItem('medical_form_draft');
-        if (!saved) return;
-        const draftData = JSON.parse(saved);
-        Object.keys(draftData).forEach(key => {
-            const el = document.getElementById(key);
-            if (el) {
-                if (el.type === 'checkbox') el.checked = draftData[key];
-                else el.value = draftData[key];
-            } else {
-                const radio = document.querySelector(`input[value="${key.split('_')[1]}"]`);
-                if (radio && draftData[key]) radio.checked = true;
-            }
-        });
-    }
-
-    function clearDraft() {
-        localStorage.removeItem('medical_form_draft');
-    }
-
-    window.addEventListener("load", () => {
-        resizeCanvas();
-        signaturePad = new SignaturePad(canvas, { penColor: '#065f46' });
-        loadDraft();
-
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('change', saveDraft);
-            input.addEventListener('keyup', saveDraft);
-        });
-
-        const now = new Date();
-        document.getElementById('time-display').innerText = "תאריך ושעת חתימה: " + now.toLocaleString('he-IL');
-    });
-
-    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("load", initSignaturePad);
+    window.addEventListener("resize", initSignaturePad);
 
     function clearSignature() { if (signaturePad) signaturePad.clear(); }
 
-    function submitForm(action = 'save') {
+    function submitForm() {
         const fname = document.getElementById('fname').value.trim();
         const lname = document.getElementById('lname').value.trim();
-        const idNumInput = document.getElementById('id_num');
-        const idNum = idNumInput.value.trim();
+        const idNum = document.getElementById('id_num').value.trim();
 
-        if (!fname || !lname || !idNum) {
-            alert("נא למלא שם פרטי, שם משפחה ותעודת זהות.");
-            return;
+        if (!fname || !lname || !idNum) { 
+            alert("נא למלא שם פרטי, שם משפחה ותעודת זהות."); 
+            return; 
+        }
+        if (signaturePad && signaturePad.isEmpty()) { 
+            alert("נא לחתום על גבי הטופס לפני השליחה."); 
+            return; 
         }
 
-        if (!isValidIsraeliID(idNum)) {
-            idNumInput.classList.add('invalid');
-            alert("תעודת הזהות אינה תקינה. נא לבדוק שוב.");
-            return;
-        } else {
-            idNumInput.classList.remove('invalid');
-        }
-
-        if (signaturePad && signaturePad.isEmpty()) {
-            alert("נא לחתום על גבי הטופס לפני השליחה.");
-            return;
-        }
+        const btn = document.getElementById('save-btn');
+        btn.disabled = true;
+        btn.innerText = "מפיק קובץ PDF...";
 
         const filename = `הצהרת_בריאות_${lname}_${fname}_${idNum}.pdf`;
         const element = document.getElementById('form-content');
 
         const opt = {
-            margin:       [2, 2, 2, 2],
+            margin:       [4, 4, 4, 4],
             filename:     filename,
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true, logging: false },
-            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait', putOnlyUsedFonts: true }
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
-        document.getElementById('action-buttons').style.display = 'none';
-
-        const worker = html2pdf().from(element).set(opt);
-
-        if (action === 'share' && navigator.canShare) {
-            worker.outputPdf('blob').then(pdfBlob => {
-                document.getElementById('action-buttons').style.display = 'flex';
-                
-                const file = new File([pdfBlob], filename, { type: 'application/pdf' });
-                if (navigator.canShare({ files: [file] })) {
-                    navigator.share({
-                        files: [file],
-                        title: 'הצהרת בריאות',
-                        text: `הצהרת בריאות עבור ${fname} ${lname}`
-                    }).then(() => {
-                        clearDraft();
-                        location.reload();
-                    }).catch(() => {});
-                } else {
-                    alert("המכשיר אינו תומך בשיתוף קבצים ישיר, הקובץ יישמר במכשיר.");
-                    worker.save().then(() => { clearDraft(); location.reload(); });
-                }
-            });
-        } else {
-            worker.save().then(() => {
-                document.getElementById('action-buttons').style.display = 'flex';
-                alert("הטופס נשמר בהצלחה בטאבלט!");
-                clearDraft();
-                location.reload();
-            });
-        }
+        html2pdf().set(opt).from(element).save().then(() => {
+            btn.disabled = false;
+            btn.innerText = "שמור טופס PDF";
+            alert("הטופס נשמר בהצלחה!");
+            location.reload();
+        }).catch(err => {
+            console.error(err);
+            btn.disabled = false;
+            btn.innerText = "שמור טופס PDF";
+            alert("אירעה שגיאה ביצירת הקובץ. נסה שוב.");
+        });
     }
 </script>
 
