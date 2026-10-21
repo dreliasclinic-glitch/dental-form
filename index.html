@@ -27,15 +27,15 @@
         .logo-container {
             text-align: center;
             border-bottom: 2px solid #cbd5e1;
-            padding-bottom: 14px;
-            margin-bottom: 12px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
         }
         .logo-container img {
-            height: 140px;
+            height: 135px;
             width: auto;
             max-width: 100%;
             object-fit: contain;
@@ -203,6 +203,16 @@
             cursor: pointer;
             font-weight: 600;
         }
+
+        /* הסתרת הכפתורים לחלוטין בהפקת ה-PDF והדפסה */
+        @media print {
+            .btn-container, .clear-btn {
+                display: none !important;
+            }
+        }
+        .hide-for-pdf {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -293,11 +303,11 @@
             <div class="canvas-wrapper">
                 <canvas id="sig-canvas"></canvas>
             </div>
-            <button type="button" class="clear-btn" onclick="clearSignature()">נקה חתימה</button>
+            <button type="button" class="clear-btn" id="clear-btn" onclick="clearSignature()">נקה חתימה</button>
         </div>
     </fieldset>
 
-    <div class="btn-container">
+    <div class="btn-container" id="action-buttons">
         <button type="button" class="submit-btn" id="save-btn" onclick="submitForm()">שמור טופס PDF</button>
         <button type="button" class="wa-btn" id="wa-btn" onclick="shareWhatsApp()">שתף קובץ PDF 📱</button>
     </div>
@@ -355,6 +365,18 @@
         return true; 
     }
 
+    function toggleButtonsForPdf(hide) {
+        const btns = document.getElementById('action-buttons');
+        const clearBtn = document.getElementById('clear-btn');
+        if (hide) {
+            btns.classList.add('hide-for-pdf');
+            clearBtn.classList.add('hide-for-pdf');
+        } else {
+            btns.classList.remove('hide-for-pdf');
+            clearBtn.classList.remove('hide-for-pdf');
+        }
+    }
+
     function submitForm() {
         if (!validateForm()) return;
 
@@ -365,6 +387,8 @@
         
         btn.disabled = true;
         btn.innerText = "מפיק PDF...";
+
+        toggleButtonsForPdf(true);
 
         const filename = `הצהרת_בריאות_${lname}_${fname}_${idNum}.pdf`;
         const element = document.getElementById('form-content');
@@ -378,12 +402,14 @@
         };
 
         html2pdf().set(opt).from(element).save().then(() => {
+            toggleButtonsForPdf(false);
             btn.disabled = false;
             btn.innerText = "שמור טופס PDF";
             alert("הטופס נשמר בהצלחה!");
             location.reload();
         }).catch(err => {
             console.error(err);
+            toggleButtonsForPdf(false);
             btn.disabled = false;
             btn.innerText = "שמור טופס PDF";
             alert("שגיאה ביצירת הקובץ.");
@@ -401,6 +427,8 @@
         btn.disabled = true;
         btn.innerText = "מכין קובץ לשיתוף...";
 
+        toggleButtonsForPdf(true);
+
         const filename = `הצהרת_בריאות_${lname}_${fname}_${idNum}.pdf`;
         const element = document.getElementById('form-content');
 
@@ -414,6 +442,7 @@
 
         try {
             const pdfBlob = await html2pdf().set(opt).from(element).output('blob');
+            toggleButtonsForPdf(false);
             const file = new File([pdfBlob], filename, { type: 'application/pdf' });
 
             if (navigator.canShare && navigator.canShare({ files: [file] })) {
@@ -436,6 +465,7 @@
             }
         } catch (err) {
             console.error(err);
+            toggleButtonsForPdf(false);
             btn.disabled = false;
             btn.innerText = "שתף קובץ PDF 📱";
         }
