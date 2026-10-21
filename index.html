@@ -110,7 +110,7 @@
         .radio-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
             font-size: 11.5px;
             color: #334155;
             align-items: center;
@@ -259,6 +259,8 @@
                     <label class="radio-item"><input type="radio" name="insurance" value="הראל"> הראל</label>
                     <label class="radio-item"><input type="radio" name="insurance" value="הפניקס"> הפניקס</label>
                     <label class="radio-item"><input type="radio" name="insurance" value="מנורה"> מנורה</label>
+                    <label class="radio-item"><input type="radio" name="insurance" value="מגדל"> מגדל</label>
+                    <label class="radio-item"><input type="radio" name="insurance" value="כלל"> כלל</label>
                     <label class="radio-item"><input type="radio" name="insurance" value="ללא"> ללא</label>
                 </div>
             </div>
@@ -267,9 +269,9 @@
             <div class="field">
                 <label>איך הגעת למרפאה?</label>
                 <div class="radio-group">
-                    <label class="radio-item"><input type="radio" name="arrival" value="המלצה"> המלצה</label>
-                    <label class="radio-item"><input type="radio" name="arrival" value="רשתות"> רשתות</label>
+                    <label class="radio-item"><input type="radio" name="arrival" value="המלצה מחבר"> המלצה מחבר</label>
                     <label class="radio-item"><input type="radio" name="arrival" value="אינטרנט"> אינטרנט</label>
+                    <label class="radio-item"><input type="radio" name="arrival" value="ביטוח"> ביטוח</label>
                 </div>
             </div>
             <div class="field">
@@ -387,12 +389,13 @@
 
         const fname = document.getElementById('fname').value.trim();
         const lname = document.getElementById('lname').value.trim();
+        const idNum = document.getElementById('id_num').value.trim();
         const phone = document.getElementById('phone').value.trim();
 
-        const text = `שאלון רפואי חדש - ${lname} ${fname} (טלפון: ${phone || 'לא צוין'})`;
-        
-        // יצירת קובץ PDF ושמירתו במכשיר ואז פתיחת וואטסאפ עם הודעה
-        const filename = `הצהרת_בריאות_${lname}_${fname}.pdf`;
+        const targetPhone = "972504244552";
+        const text = `שאלון רפואי חדש - ${lname} ${fname} (ת.ז: ${idNum}, נייד: ${phone || 'לא צוין'})`;
+
+        const filename = `הצהרת_בריאות_${lname}_${fname}_${idNum}.pdf`;
         const element = document.getElementById('form-content');
 
         const opt = {
@@ -404,7 +407,7 @@
         };
 
         html2pdf().set(opt).from(element).save().then(() => {
-            const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+            const waUrl = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(text)}`;
             window.open(waUrl, '_blank');
             location.reload();
         });
