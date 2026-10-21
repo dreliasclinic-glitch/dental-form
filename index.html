@@ -27,11 +27,17 @@
         .logo-container {
             text-align: center;
             border-bottom: 2px solid #cbd5e1;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80px;
         }
         .logo-container img {
-            max-height: 70px;
+            max-height: 90px;
+            width: auto;
+            max-width: 100%;
             object-fit: contain;
             display: block;
             margin: 0 auto;
@@ -407,11 +413,9 @@
         };
 
         try {
-            // יצירת קובץ ה-PDF בזיכרון כ-Blob
             const pdfBlob = await html2pdf().set(opt).from(element).output('blob');
             const file = new File([pdfBlob], filename, { type: 'application/pdf' });
 
-            // בדיקה אם הטאבלט תומך בשיתוף קבצים טבעי (Web Share API)
             if (navigator.canShare && navigator.canShare({ files: [file] })) {
                 await navigator.share({
                     files: [file],
@@ -421,7 +425,6 @@
                 btn.disabled = false;
                 btn.innerText = "שתף קובץ PDF 📱";
             } else {
-                // במידה ולא תומך בשיתוף ישיר - מוריד את הקובץ ופותח את השיחה בוואטסאפ
                 html2pdf().set(opt).from(element).save().then(() => {
                     const targetPhone = "972504244552";
                     const text = `הצהרת בריאות מצורפת עבור ${lname} ${fname} (ת.ז: ${idNum})`;
