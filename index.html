@@ -149,24 +149,43 @@
         }
         .btn-container {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
         }
         .submit-btn {
             background-color: #0d9488;
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 12px 20px;
             font-size: 15px;
             font-weight: 700;
             border-radius: 8px;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(13, 148, 136, 0.2);
-            width: 100%;
-            max-width: 320px;
+            flex: 1;
+            max-width: 240px;
             transition: background-color 0.2s;
             -webkit-tap-highlight-color: transparent;
         }
         .submit-btn:active { background-color: #0f766e; }
+        .wa-btn {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);
+            flex: 1;
+            max-width: 240px;
+            transition: background-color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .wa-btn:active { background-color: #128c7e; }
         .clear-btn {
             background-color: #64748b;
             color: white;
@@ -272,6 +291,7 @@
 
     <div class="btn-container">
         <button type="button" class="submit-btn" id="save-btn" onclick="submitForm()">שמור טופס PDF</button>
+        <button type="button" class="wa-btn" id="wa-btn" onclick="shareWhatsApp()">שלח לוואטסאפ 📱</button>
     </div>
 </div>
 
@@ -311,23 +331,32 @@
 
     function clearSignature() { if (signaturePad) signaturePad.clear(); }
 
-    function submitForm() {
+    function validateForm() {
         const fname = document.getElementById('fname').value.trim();
         const lname = document.getElementById('lname').value.trim();
         const idNum = document.getElementById('id_num').value.trim();
 
         if (!fname || !lname || !idNum) { 
             alert("נא למלא שם פרטי, שם משפחה ותעודת זהות."); 
-            return; 
+            return false; 
         }
         if (signaturePad && signaturePad.isEmpty()) { 
             alert("נא לחתום על גבי הטופס לפני השליחה."); 
-            return; 
+            return false; 
         }
+        return true;
+    }
 
+    function submitForm() {
+        if (!validateForm()) return;
+
+        const fname = document.getElementById('fname').value.trim();
+        const lname = document.getElementById('lname').value.trim();
+        const idNum = document.getElementById('id_num').value.trim();
         const btn = document.getElementById('save-btn');
+        
         btn.disabled = true;
-        btn.innerText = "מפיק קובץ PDF...";
+        btn.innerText = "מפיק PDF...";
 
         const filename = `הצהרת_בריאות_${lname}_${fname}_${idNum}.pdf`;
         const element = document.getElementById('form-content');
@@ -349,7 +378,35 @@
             console.error(err);
             btn.disabled = false;
             btn.innerText = "שמור טופס PDF";
-            alert("אירעה שגיאה ביצירת הקובץ. נסה שוב.");
+            alert("שגיאה ביצירת הקובץ.");
+        });
+    }
+
+    function shareWhatsApp() {
+        if (!validateForm()) return;
+
+        const fname = document.getElementById('fname').value.trim();
+        const lname = document.getElementById('lname').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+
+        const text = `שאלון רפואי חדש - ${lname} ${fname} (טלפון: ${phone || 'לא צוין'})`;
+        
+        // יצירת קובץ PDF ושמירתו במכשיר ואז פתיחת וואטסאפ עם הודעה
+        const filename = `הצהרת_בריאות_${lname}_${fname}.pdf`;
+        const element = document.getElementById('form-content');
+
+        const opt = {
+            margin:       [2, 2, 2, 2],
+            filename:     filename,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true, logging: false },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save().then(() => {
+            const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+            window.open(waUrl, '_blank');
+            location.reload();
         });
     }
 </script>
