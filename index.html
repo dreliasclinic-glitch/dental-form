@@ -293,7 +293,7 @@
 
     <div class="btn-container">
         <button type="button" class="submit-btn" id="save-btn" onclick="submitForm()">שמור טופס PDF</button>
-        <button type="button" class="wa-btn" id="wa-btn" onclick="shareWhatsApp()">שלח לוואטסאפ 📱</button>
+        <button type="button" class="wa-btn" id="wa-btn" onclick="shareWhatsApp()">שתף קובץ PDF 📱</button>
     </div>
 </div>
 
@@ -384,16 +384,16 @@
         });
     }
 
-    function shareWhatsApp() {
+    async function shareWhatsApp() {
         if (!validateForm()) return;
 
         const fname = document.getElementById('fname').value.trim();
         const lname = document.getElementById('lname').value.trim();
         const idNum = document.getElementById('id_num').value.trim();
-        const phone = document.getElementById('phone').value.trim();
+        const btn = document.getElementById('wa-btn');
 
-        const targetPhone = "972504244552";
-        const text = `שאלון רפואי חדש - ${lname} ${fname} (ת.ז: ${idNum}, נייד: ${phone || 'לא צוין'})`;
+        btn.disabled = true;
+        btn.innerText = "מכין קובץ לשיתוף...";
 
         const filename = `הצהרת_בריאות_${lname}_${fname}_${idNum}.pdf`;
         const element = document.getElementById('form-content');
@@ -406,11 +406,36 @@
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
-        html2pdf().set(opt).from(element).save().then(() => {
-            const waUrl = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(text)}`;
-            window.open(waUrl, '_blank');
-            location.reload();
-        });
+        try {
+            // יצירת קובץ ה-PDF בזיכרון כ-Blob
+            const pdfBlob = await html2pdf().set(opt).from(element).output('blob');
+            const file = new File([pdfBlob], filename, { type: 'application/pdf' });
+
+            // בדיקה אם הטאבלט תומך בשיתוף קבצים טבעי (Web Share API)
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    files: [file],
+                    title: `הצהרת בריאות - ${lname} ${fname}`,
+                    text: `הצהרת בריאות עבור ${lname} ${fname} (ת.ז: ${idNum})`
+                });
+                btn.disabled = false;
+                btn.innerText = "שתף קובץ PDF 📱";
+            } else {
+                // במידה ולא תומך בשיתוף ישיר - מוריד את הקובץ ופותח את השיחה בוואטסאפ
+                html2pdf().set(opt).from(element).save().then(() => {
+                    const targetPhone = "972504244552";
+                    const text = `הצהרת בריאות מצורפת עבור ${lname} ${fname} (ת.ז: ${idNum})`;
+                    const waUrl = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(text)}`;
+                    window.open(waUrl, '_blank');
+                    btn.disabled = false;
+                    btn.innerText = "שתף קובץ PDF 📱";
+                });
+            }
+        } catch (err) {
+            console.error(err);
+            btn.disabled = false;
+            btn.innerText = "שתף קובץ PDF 📱";
+        }
     }
 </script>
 
