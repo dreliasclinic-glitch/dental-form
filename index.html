@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>שאלון רפואי - ד"ר אסעד אליאס</title>
+    
+    <!-- הגדרות אפליקציה לטאבלט (PWA) -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="שאלון רפואי">
+    <link rel="apple-touch-icon" href="logo.png">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
     <style>
@@ -204,7 +213,6 @@
             font-weight: 600;
         }
 
-        /* הסתרת הכפתורים לחלוטין בהפקת ה-PDF והדפסה */
         @media print {
             .btn-container, .clear-btn {
                 display: none !important;
